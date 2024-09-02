@@ -31,7 +31,7 @@
 
 		.footer__top & {
 			display: grid;
-			grid-template-columns: 1.1fr 0.9fr 1fr;
+			grid-template-columns: 1.2fr 0.9fr 1fr;
 			align-items: start;
 			@include adaptiveValue('column-gap', 104, 40);
 
