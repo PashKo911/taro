@@ -1180,7 +1180,6 @@ h6 {
 }
 .hero__img {
   width: 100%;
-  aspect-ratio: 458/620;
   overflow: hidden
 }
 .hero__img img {
@@ -1210,7 +1209,8 @@ h6 {
   animation: from-right .4s 1.1s forwards
 }
 .about {
-  position: relative
+  position: relative;
+  z-index: 2
 }
 .about__bg {
   position: absolute;

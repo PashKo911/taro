@@ -25,6 +25,7 @@
 	position: relative;
 
 	@include adaptiveValue('padding-top', 214, 150);
+	// @include adaptiveValue('padding-bottom', 40, 0);
 
 	// .hero__bg
 	&__bg {
@@ -157,7 +158,6 @@
 	// .hero__img
 	&__img {
 		width: 100%;
-		aspect-ratio: 458 / 620;
 		overflow: hidden;
 
 		@media ((min-width: toEm(575)) and (max-width:$mobile)) {
@@ -235,6 +235,7 @@
 
 .about {
 	position: relative;
+	z-index: 2;
 
 	@include adaptiveValue('padding-top', 134, 60);
 	@include adaptiveValue('padding-bottom', 170, 100);
