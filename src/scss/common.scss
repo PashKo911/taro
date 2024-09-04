@@ -75,7 +75,6 @@
 	@media (any-hover: hover) {
 		&:hover {
 			box-shadow: toRem(0) toRem(0) 0 0 #000;
-			transform: translate(0, toRem(1));
 		}
 
 		&:hover svg {

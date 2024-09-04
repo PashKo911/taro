@@ -2922,9 +2922,7 @@ h2 {
     letter-spacing: .03em
   }
   .social-link:hover {
-    box-shadow: 0 0 0 0 #000;
-    -webkit-transform: translate(0,.0625rem);
-    transform: translate(0,.0625rem)
+    box-shadow: 0 0 0 0 #000
   }
   .social-link:hover svg {
     -webkit-transform: scale(1.1);
