@@ -76,6 +76,10 @@
 		aspect-ratio: 1430 / 623;
 		z-index: 3;
 
+		@media (max-width: toEm(575)) {
+			width: 130%;
+		}
+
 		img {
 			position: absolute;
 			width: 100%;
@@ -407,16 +411,17 @@
 					left: -11%;
 				}
 			}
-			&:nth-child(2) {
-				width: 14%;
+			&:nth-child(1) {
+				width: 19%;
 				// top: -19%;
-				top: 0%;
+				top: 3%;
 				transform: translate(0, -76%);
-				left: -3.8%;
+				left: -9%;
 				z-index: 3;
 
 				@media (max-width: $tablet) {
-					width: 10%;
+					width: 13%;
+					top: 6%;
 					// top: -19%;
 					left: -3.8%;
 				}
@@ -657,7 +662,7 @@
 		img {
 			position: absolute;
 			width: 100%;
-			height: 100%;
+			// height: 100%;
 			top: 0%;
 			left: 0%;
 			object-fit: cover;
@@ -762,7 +767,6 @@
 	&__img-small {
 		position: relative;
 		z-index: 5;
-		left: 20%;
 		width: 23%;
 
 		@include adaptiveValue('margin-top', -80, -130, 2, $containerWidth, 991.98);
@@ -777,17 +781,17 @@
 			position: relative;
 			left: 0;
 			object-fit: cover;
-			animation-fill-mode: forwards;
 			will-change: left;
-			animation: scroll;
+			animation-name: scroll;
+			animation-fill-mode: forwards;
 			animation-timeline: view();
-			animation-range: entry 0 cover 90%;
+			animation-range: entry 0 cover 100%;
 			@keyframes scroll {
 				0% {
-					left: 0;
+					left: -50%;
 				}
 				100% {
-					left: 120%;
+					left: 350%;
 				}
 			}
 		}

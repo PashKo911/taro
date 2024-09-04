@@ -77,3 +77,11 @@ h6 {
 	font-weight: inherit;
 	font-size: inherit;
 }
+
+h1,
+h2 {
+	position: absolute;
+	visibility: hidden;
+	opacity: 0;
+	pointer-events: none;
+}

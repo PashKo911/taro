@@ -70,26 +70,6 @@
 	}
 	// .menu__item
 	&__item {
-		transition: transform 0.2s;
-		will-change: transform;
-		&:nth-child(odd) {
-			transform: rotate(1.96deg);
-		}
-		&:nth-child(even) {
-			transform: rotate(-2.3deg);
-		}
-
-		@media (any-hover: hover) {
-			&:hover {
-				transform: rotate(0deg);
-			}
-			&:hover .menu__link {
-				color: #ff212e;
-			}
-			&:hover .menu__link--buy {
-				color: #fff;
-			}
-		}
 	}
 
 	// .menu__link
@@ -102,12 +82,28 @@
 		border: toRem(2) solid #000;
 		background: #26ffd0;
 		box-shadow: toRem(1) toRem(3) 0 0 #000;
-		transition: color 0.2s;
-		will-change: color;
+		transition:
+			color 0.2s,
+			transform 0.2s;
+		will-change: color, transform;
 		font-size: toRem(28);
 
 		@include adaptiveValue('padding-left', 40, 30, 2, $containerWidth, 991.98);
 		@include adaptiveValue('padding-right', 40, 30, 2, $containerWidth, 991.98);
+
+		.menu__item:nth-child(odd) & {
+			transform: rotate(1.96deg);
+		}
+		.menu__item:nth-child(even) & {
+			transform: rotate(-2.3deg);
+		}
+
+		@media (any-hover: hover) {
+			.menu__item:hover & {
+				transform: rotate(0deg);
+				color: #ff212e;
+			}
+		}
 
 		&._navigator-active {
 			background-color: #4adbff;
@@ -122,6 +118,13 @@
 		// .menu__link--buy
 		&--buy {
 			background-color: #ff212e;
+
+			@media (any-hover: hover) {
+				.menu__item:hover & {
+					transform: rotate(0deg);
+					color: #fff;
+				}
+			}
 		}
 	}
 }

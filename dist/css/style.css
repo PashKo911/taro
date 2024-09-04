@@ -90,6 +90,13 @@ h6 {
   font-weight: inherit;
   font-size: inherit
 }
+h1,
+h2 {
+  position: absolute;
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none
+}
 .lock body {
   overflow: hidden;
   touch-action: none;
@@ -135,20 +142,6 @@ h6 {
   padding: .75rem .4375rem;
   gap: .03125rem
 }
-.menu__item {
-  transition: -webkit-transform .2s;
-  transition: transform .2s;
-  transition: transform .2s,-webkit-transform .2s;
-  will-change: transform
-}
-.menu__item:nth-child(odd) {
-  -webkit-transform: rotate(1.96deg);
-  transform: rotate(1.96deg)
-}
-.menu__item:nth-child(even) {
-  -webkit-transform: rotate(-2.3deg);
-  transform: rotate(-2.3deg)
-}
 .menu__link {
   color: #000;
   font-family: "GoodDog New";
@@ -158,9 +151,19 @@ h6 {
   border: .125rem solid #000;
   background: #26ffd0;
   box-shadow: .0625rem .1875rem 0 0 #000;
-  transition: color .2s;
-  will-change: color;
+  transition: color .2s,-webkit-transform .2s;
+  transition: color .2s,transform .2s;
+  transition: color .2s,transform .2s,-webkit-transform .2s;
+  will-change: color,transform;
   font-size: 1.75rem
+}
+.menu__item:nth-child(odd) .menu__link {
+  -webkit-transform: rotate(1.96deg);
+  transform: rotate(1.96deg)
+}
+.menu__item:nth-child(even) .menu__link {
+  -webkit-transform: rotate(-2.3deg);
+  transform: rotate(-2.3deg)
 }
 .menu__link._navigator-active {
   background-color: #4adbff
@@ -862,8 +865,10 @@ h6 {
   display: flex;
   justify-content: center;
   align-items: center;
-  transition: box-shadow .2s;
-  will-change: box-shadow;
+  transition: box-shadow .2s,-webkit-transform .2s;
+  transition: box-shadow .2s,transform .2s;
+  transition: box-shadow .2s,transform .2s,-webkit-transform .2s;
+  will-change: box-shadow,transform;
   flex-shrink: 0
 }
 .social-link svg {
@@ -888,7 +893,7 @@ h6 {
   background-color: #f9e988
 }
 .social-link--m {
-  background-color: #242223
+  background-color: #3961fb
 }
 .social-link--sn {
   background-color: #fff
@@ -940,7 +945,7 @@ h6 {
   content: "";
   width: 1.6666666667em;
   aspect-ratio: 1;
-  background: url(../img/row-dog.png) center/cover no-repeat
+  background: url(../img/row-dog.webp) center/cover no-repeat
 }
 .red {
   color: #ff3114
@@ -1039,6 +1044,45 @@ h6 {
   position: relative;
   aspect-ratio: 542/445
 }
+.footer__img._watcher-view img {
+  -webkit-animation: footer-img .4s .3s forwards;
+  animation: footer-img .4s .3s forwards
+}
+.footer__img img {
+  -webkit-transform: translate(50%,50%) scale(.4);
+  transform: translate(50%,50%) scale(.4);
+  opacity: 0;
+  visibility: hidden;
+  will-change: transform,visibility,opacity
+}
+@-webkit-keyframes footer-img {
+  0% {
+    -webkit-transform: translate(50%,50%) scale(.4);
+    transform: translate(50%,50%) scale(.4);
+    opacity: 0;
+    visibility: hidden
+  }
+  100% {
+    opacity: 1;
+    visibility: visible;
+    -webkit-transform: translate(0,0);
+    transform: translate(0,0)
+  }
+}
+@keyframes footer-img {
+  0% {
+    -webkit-transform: translate(50%,50%) scale(.4);
+    transform: translate(50%,50%) scale(.4);
+    opacity: 0;
+    visibility: hidden
+  }
+  100% {
+    opacity: 1;
+    visibility: visible;
+    -webkit-transform: translate(0,0);
+    transform: translate(0,0)
+  }
+}
 .footer__bottom {
   position: relative;
   z-index: 3;
@@ -1052,6 +1096,19 @@ h6 {
   color: #000;
   font-style: normal;
   text-transform: uppercase
+}
+.footer__mail {
+  line-height: 1.3;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  transition: color .2s
+}
+.footer__mail svg {
+  aspect-ratio: 24/20;
+  fill: #000;
+  transition: fill .2s
 }
 .footer__osnovo {
   aspect-ratio: 234/32;
@@ -1369,12 +1426,12 @@ h6 {
   left: -11%;
   z-index: 1
 }
-.about__decor img:nth-child(2) {
-  width: 14%;
-  top: 0;
+.about__decor img:nth-child(1) {
+  width: 19%;
+  top: 3%;
   -webkit-transform: translate(0,-76%);
   transform: translate(0,-76%);
-  left: -3.8%;
+  left: -9%;
   z-index: 3
 }
 .about__decor img:nth-child(3) {
@@ -1554,7 +1611,6 @@ h6 {
 .buy__bg img {
   position: absolute;
   width: 100%;
-  height: 100%;
   top: 0;
   left: 0;
   -o-object-fit: cover;
@@ -1613,7 +1669,6 @@ h6 {
 .buy__img-small {
   position: relative;
   z-index: 5;
-  left: 20%;
   width: 23%
 }
 .buy__img-small img {
@@ -1622,28 +1677,28 @@ h6 {
   left: 0;
   -o-object-fit: cover;
   object-fit: cover;
+  will-change: left;
+  -webkit-animation-name: scroll;
+  animation-name: scroll;
   -webkit-animation-fill-mode: forwards;
   animation-fill-mode: forwards;
-  will-change: left;
-  -webkit-animation: scroll;
-  animation: scroll;
   animation-timeline: view();
-  animation-range: entry 0 cover 90%
+  animation-range: entry 0 cover 100%
 }
 @-webkit-keyframes scroll {
   0% {
-    left: 0
+    left: -50%
   }
   100% {
-    left: 120%
+    left: 350%
   }
 }
 @keyframes scroll {
   0% {
-    left: 0
+    left: -50%
   }
   100% {
-    left: 120%
+    left: 350%
   }
 }
 .item-buy {
@@ -2136,6 +2191,12 @@ h6 {
   .footer__copy {
     font-size: 1.25rem
   }
+  .footer__mail {
+    font-size: 1.25rem
+  }
+  .footer__mail svg {
+    width: 1.5rem
+  }
   .footer__osnovo {
     width: 14.625rem
   }
@@ -2264,6 +2325,12 @@ h6 {
   }
   .footer__copy {
     font-size: 1rem
+  }
+  .footer__mail {
+    font-size: 1rem
+  }
+  .footer__mail svg {
+    width: 1.125rem
   }
   .footer__osnovo {
     width: 11.875rem
@@ -2489,8 +2556,9 @@ h6 {
     width: 26%;
     left: -11%
   }
-  .about__decor img:nth-child(2) {
-    width: 10%;
+  .about__decor img:nth-child(1) {
+    width: 13%;
+    top: 6%;
     left: -3.8%
   }
   .about__decor img:nth-child(3) {
@@ -2517,6 +2585,11 @@ h6 {
     grid-template-columns: 1fr;
     justify-items: center;
     row-gap: 1.875rem
+  }
+  .footer__bottom .footer__container {
+    flex-wrap: wrap;
+    justify-content: space-around;
+    row-gap: .625rem
   }
   .footer__img {
     width: 60%
@@ -2583,6 +2656,9 @@ h6 {
   .hero__title {
     width: 75%
   }
+  .hero__dec-title {
+    width: 130%
+  }
   .hero__bottom {
     grid-template-columns: 1fr;
     justify-items: center
@@ -2590,8 +2666,7 @@ h6 {
 }
 @media (max-width:29.99875em) {
   .footer__bottom .footer__container {
-    flex-direction: column;
-    row-gap: .625rem
+    flex-direction: column
   }
   .about__dec-text img {
     -webkit-transform: translate(0,-54.5%) rotate(2.1deg);
@@ -2713,6 +2788,12 @@ h6 {
   .footer__copy {
     font-size: clamp(1rem ,.9279279279rem + .3603603604vw ,1.25rem)
   }
+  .footer__mail {
+    font-size: clamp(1rem ,.9279279279rem + .3603603604vw ,1.25rem)
+  }
+  .footer__mail svg {
+    width: clamp(1.125rem ,1.0168918919rem + .5405405405vw ,1.5rem)
+  }
   .footer__osnovo {
     width: clamp(11.875rem ,11.0822072072rem + 3.963963964vw ,14.625rem)
   }
@@ -2820,14 +2901,14 @@ h6 {
   }
 }
 @media (any-hover:hover) {
-  .menu__item:hover {
-    -webkit-transform: rotate(0);
-    transform: rotate(0)
-  }
   .menu__item:hover .menu__link {
+    -webkit-transform: rotate(0);
+    transform: rotate(0);
     color: #ff212e
   }
   .menu__item:hover .menu__link--buy {
+    -webkit-transform: rotate(0);
+    transform: rotate(0);
     color: #fff
   }
   .cn__button:hover svg path {
@@ -2841,7 +2922,9 @@ h6 {
     letter-spacing: .03em
   }
   .social-link:hover {
-    box-shadow: 0 0 0 0 #000
+    box-shadow: 0 0 0 0 #000;
+    -webkit-transform: translate(0,.0625rem);
+    transform: translate(0,.0625rem)
   }
   .social-link:hover svg {
     -webkit-transform: scale(1.1);
@@ -2850,6 +2933,12 @@ h6 {
   .line:hover .line__row {
     -webkit-animation-play-state: paused;
     animation-play-state: paused
+  }
+  .footer__mail:hover {
+    color: #ff212e
+  }
+  .footer__mail:hover svg {
+    fill: #ff212e
   }
   .footer__osnovo:hover {
     -webkit-transform: scale(1.05);

@@ -51,9 +51,15 @@
 			justify-content: space-between;
 			align-items: center;
 			column-gap: toRem(15);
+
+			@media (max-width: $mobile) {
+				flex-wrap: wrap;
+				justify-content: space-around;
+				row-gap: toRem(10);
+			}
+
 			@media (max-width: $mobileSmall) {
 				flex-direction: column;
-				row-gap: toRem(10);
 			}
 		}
 	}
@@ -64,8 +70,11 @@
 	&__img {
 		position: relative;
 		aspect-ratio: 542 / 445;
-
 		@include adaptiveValue('margin-top', -80, -10, 1, 991.98, 767.98);
+
+		&._watcher-view img {
+			animation: footer-img 0.4s 0.3s forwards;
+		}
 
 		@media (min-width: $tablet) {
 			width: 100%;
@@ -79,6 +88,23 @@
 			width: 60%;
 		}
 		img {
+			transform: translate(50%, 50%) scale(0.4);
+			opacity: 0;
+			visibility: hidden;
+			will-change: transform, visibility, opacity;
+
+			@keyframes footer-img {
+				0% {
+					transform: translate(50%, 50%) scale(0.4);
+					opacity: 0;
+					visibility: hidden;
+				}
+				100% {
+					opacity: 1;
+					visibility: visible;
+					transform: translate(0, 0);
+				}
+			}
 			@media (max-width: $tablet) {
 				width: 100%;
 				margin-left: auto;
@@ -109,6 +135,34 @@
 		text-transform: uppercase;
 		@include adaptiveValue('font-size', 20, 16);
 	}
+
+	// .footer__mail
+	&__mail {
+		line-height: 1.3;
+		text-transform: uppercase;
+		display: flex;
+		align-items: center;
+		gap: toRem(12);
+		transition: color 0.2s;
+		@include adaptiveValue('font-size', 20, 16);
+
+		@media (any-hover: hover) {
+			&:hover {
+				color: #ff212e;
+			}
+			&:hover svg {
+				fill: #ff212e;
+			}
+		}
+
+		svg {
+			aspect-ratio: 24 / 20;
+			fill: #000;
+			transition: fill 0.2s;
+			@include adaptiveValue('width', 24, 18);
+		}
+	}
+
 	// .footer__osnovo
 	&__osnovo {
 		aspect-ratio: 234 / 32;
