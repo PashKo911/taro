@@ -165,6 +165,8 @@ export let bodyUnlock = (delay = 500) => {
 			})
 			document.body.style.paddingRight = ''
 			document.documentElement.classList.remove('lock')
+			// !Для Lenis
+			window.onRefreshLenisScroll ? window.onRefreshLenisScroll() : ''
 		}, delay)
 		bodyLockStatus = false
 		setTimeout(function () {
@@ -182,7 +184,8 @@ export let bodyLock = (delay = 500) => {
 
 		document.body.style.paddingRight = lockPaddingValue
 		document.documentElement.classList.add('lock')
-
+		// !Для Lenis
+		window.lenis?.destroy()
 		bodyLockStatus = false
 		setTimeout(function () {
 			bodyLockStatus = true
@@ -274,7 +277,7 @@ export function spollers() {
 							? (spollerBlock.open = true)
 							: setTimeout(() => {
 									spollerBlock.open = false
-							  }, spollerSpeed)
+								}, spollerSpeed)
 
 						spollerTitle.classList.toggle('_spoller-active')
 						_slideToggle(spollerTitle.nextElementSibling, spollerSpeed)
@@ -455,7 +458,7 @@ export function tabs() {
 				tabActiveTitle.length
 					? (tabActiveTitle = Array.from(tabActiveTitle).filter(
 							(item) => item.closest('[data-tabs]') === tabsBlock
-					  ))
+						))
 					: null
 				tabActiveTitle.length ? tabActiveTitle[0].classList.remove('_tab-active') : null
 				tabTitle.classList.add('_tab-active')
@@ -471,38 +474,25 @@ export function menuInit() {
 		document.addEventListener('click', function (e) {
 			if (bodyLockStatus && e.target.closest('.icon-menu')) {
 				bodyLockToggle()
-				document.documentElement.classList.toggle('menu-open')
-			}
-		})
-	}
-}
-export function menuOpen() {
-	bodyLock()
-	document.documentElement.classList.add('menu-open')
-}
-export function menuClose() {
-	bodyUnlock()
-	document.documentElement.classList.remove('menu-open')
-}
-
-//========================================================================================================================================================
-// Анімований виліт меню, моя робота
-
-export function menuInitForAnimate() {
-	if (document.querySelector('.icon-menu')) {
-		document.addEventListener('click', function (e) {
-			if (bodyLockStatus && e.target.closest('.icon-menu')) {
-				bodyLockToggle()
 				if (document.documentElement.classList.contains('menu-open')) {
-					document.documentElement.classList.remove('menu-open')
-					document.documentElement.classList.add('menu-close')
+					menuClose()
 				} else {
-					document.documentElement.classList.remove('menu-close')
-					document.documentElement.classList.add('menu-open')
+					menuOpen()
 				}
 			}
 		})
 	}
+}
+
+export function menuOpen() {
+	bodyLock()
+	document.documentElement.classList.add('menu-open')
+	document.documentElement.classList.remove('menu-close')
+}
+export function menuClose() {
+	bodyUnlock()
+	document.documentElement.classList.add('menu-close')
+	document.documentElement.classList.remove('menu-open')
 }
 
 // Модуль "показати ще" =======================================================================================================================================================================================================================
@@ -739,12 +729,12 @@ export function customCursor(isShadowTrue) {
 			cursorPointer
 				? (cursorPointer.style.transform = `translate3d(${e.clientX - cursorPointerStyle.width / 2}px, ${
 						e.clientY - cursorPointerStyle.height / 2
-				  }px, 0)`)
+					}px, 0)`)
 				: null
 			cursorShadow
 				? (cursorShadow.style.transform = `translate3d(${e.clientX - cursorShadowStyle.width / 2}px, ${
 						e.clientY - cursorShadowStyle.height / 2
-				  }px, 0)`)
+					}px, 0)`)
 				: null
 		}
 
