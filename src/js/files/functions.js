@@ -41,6 +41,7 @@ export let isMobile = {
 		)
 	},
 }
+
 /* Додавання класу touch для HTML, якщо браузер мобільний */
 export function addTouchClass() {
 	// Додавання класу _touch для HTML, якщо браузер мобільний
@@ -1105,3 +1106,23 @@ export function playVideo() {
 // 		}
 // 	})
 // }
+//Lenis Плавний скрол========================================================================================================================================================
+import Lenis from '@studio-freight/lenis'
+
+window.onRefreshLenisScroll = () => {
+	window.lenis?.destroy()
+
+	setTimeout(() => {
+		window.lenis = new Lenis({
+			eventsTarget: document.querySelector('main'),
+			duration: 1.2,
+			infinite: false,
+			autoResize: true,
+		})
+		function raf(time) {
+			window.lenis.raf(time)
+			requestAnimationFrame(raf)
+		}
+		requestAnimationFrame(raf)
+	}, 0)
+}
